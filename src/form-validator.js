@@ -14,3 +14,51 @@ FP - requirement
 // };
 
 // use currying instead
+const mustBe = validateType => validate => s => validateType(s) && validate(s);
+
+const aCharacter = s =>
+  s
+    .split('')
+    .every(
+      c =>
+        (c.charCodeAt(0) >= 65 && c.charCodeAt(0) <= 90) ||
+        (c.charCodeAt(0) >= 97 && c.charCodeAt(0) <= 122)
+    );
+
+const atLeast = n => s => s.length > n;
+const atLeast2 = atLeast(2);
+
+const exactly = n => s => s.length === n;
+const exactly2 = exactly(2);
+const exactly5 = exactly(5);
+
+const mustBeAtLeast2Chars = mustBe(aCharacter)(atLeast2);
+const mustBeExactly2Chars = mustBe(aCharacter)(exactly2);
+const mustBeExactly5Digits = mustBe(aCharacter)(exactly5);
+
+const defaultCriteria = {
+  firstName: [
+    s => (mustBeAtLeast2Chars(s) ? '' : 'First name must be at least 2 characters')
+  ],
+  lastName: [
+    s => (mustBeAtLeast2Chars(s) ? '' : 'Last name must be at least 2 characters')
+  ],
+  zipCode: [
+    s => (mustBeExactly5Digits(s) ? '' : 'Zip code must be exactly 5 characters')
+  ],
+  state: [s => (mustBeExactly2Chars(s) ? '' : 'State must be exactly 2 characters')]
+};
+
+const getErrorMessage = (inputs, criteria = defaultCriteria) => {
+  const errors = Object.keys(inputs).reduce((acc, name) => {
+    const errorBlock = criteria[name].reduce((acc, f) => [...acc, f(inputs[name])], []);
+    return [...acc, ...errorBlock];
+  }, []);
+
+  return errors.filter(e => e.length > 0);
+};
+
+module.exports = {
+  getErrorMessage,
+  inputCritera: defaultCriteria
+};
