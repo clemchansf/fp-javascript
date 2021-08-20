@@ -1,0 +1,27 @@
+{
+  "name": "fp-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha \"src/**/*.test.js\" --recursive --require @babel/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clemchansf/fp-javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clemchansf/fp-javascript/issues"
+  },
+  "homepage": "https://github.com/clemchansf/fp-javascript#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/register": "^7.15.3",
+    "chai": "^4.3.4",
+    "mocha": "^9.0.3"
+  }
+}
