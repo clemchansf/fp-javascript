@@ -49,16 +49,23 @@ const defaultCriteria = {
   state: [s => (mustBeExactly2Chars(s) ? '' : 'State must be exactly 2 characters')]
 };
 
-const getErrorMessage = (inputs, criteria = defaultCriteria) => {
+export const getErrorMessage = (inputs, criteria = defaultCriteria) => {
   const errors = Object.keys(inputs).reduce((acc, name) => {
     const errorBlock = criteria[name].reduce((acc, f) => [...acc, f(inputs[name])], []);
-    return [...acc, ...errorBlock];
+    // return [...acc, ...errorBlock];
+
+    // improve speed
+    Object.keys(errorBlock).forEach(key => {
+      acc.push(errorBlock[key]);
+    });
+    return acc;
   }, []);
 
-  return errors.filter(e => e.length > 0);
+  // criteria.firstName = null; <== no mutation test
+  return errors.filter(e => e);
 };
 
-module.exports = {
-  getErrorMessage,
-  inputCritera: defaultCriteria
-};
+// module.exports = {
+//   getErrorMessage,
+defaultCriteria;
+// };
