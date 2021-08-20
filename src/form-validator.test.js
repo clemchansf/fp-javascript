@@ -35,5 +35,16 @@ describe('Form Field Validation - basic functionality', () => {
     const actual = getErrorMessage(partialInputValues);
     expect(actual).to.deep.equal(expected);
   });
-  it('gets error messages for a completed form data');
+  it('gets error messages for a completed form data', () => {
+    const completeInputValues = {
+      firstName: 'Good', // Must be at least 2 characters
+      lastName: 'Morning', // Must be at least 2 characters
+      zipCode: '94133', // Must be exactly 5 characters
+      state: 'CA' // Must be exactly 2 characters
+    };
+
+    const expected = [];
+    const actual = getErrorMessage(completeInputValues);
+    expect(actual).to.deep.equal(expected);
+  });
 });
