@@ -72,5 +72,5 @@ export const getErrorMessage = (inputs, criteria = defaultCriteria) => {
 
 // module.exports = {
 //   getErrorMessage,
-defaultCriteria;
+// defaultCriteria;
 // };
