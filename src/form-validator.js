@@ -1,4 +1,8 @@
-import { and } from './utils/helpers.js';
+import {
+  and as mustBe,
+  greaterOrEqualTo as atLeast,
+  equal as exactly
+} from './utils/helpers.js';
 /*
 FP - requirement
     1. no mutation
@@ -29,16 +33,13 @@ const aCharacter = s =>
 const aDigit = s =>
   s.split('').every(c => c.charCodeAt(0) >= 48 && c.charCodeAt(0) <= 57);
 
-const atLeast = n => s => s.length > n;
 const atLeast2 = atLeast(2);
-
-const exactly = n => s => s.length === n;
 const exactly2 = exactly(2);
 const exactly5 = exactly(5);
 
-const mustBeAtLeast2Chars = and(aCharacter)(atLeast2);
-const mustBeExactly2Chars = and(aCharacter)(exactly2);
-const mustBeExactly5Digits = and(aDigit)(exactly5);
+const mustBeAtLeast2Chars = mustBe(aCharacter)(atLeast2);
+const mustBeExactly2Chars = mustBe(aCharacter)(exactly2);
+const mustBeExactly5Digits = mustBe(aDigit)(exactly5);
 
 const defaultCriteria = {
   firstName: [
@@ -65,7 +66,7 @@ export const getErrorMessage = (inputs, criteria = defaultCriteria) => {
     return acc;
   }, []);
 
-  // criteria.firstName = null; <== no mutation test
+  // criteria.firstName = null; <== eslint no mutation test
   return errors.filter(e => e);
 };
 

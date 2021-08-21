@@ -21,3 +21,7 @@ export const and =
   g =>
   (...args) =>
     f(...args) && g(...args);
+
+export const equal = n => s => s.length === n;
+
+export const greaterOrEqualTo = n => s => s.length >= n;
