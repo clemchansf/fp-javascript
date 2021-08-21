@@ -69,8 +69,3 @@ export const getErrorMessage = (inputs, criteria = defaultCriteria) => {
   // criteria.firstName = null; <== eslint no mutation test
   return errors.filter(e => e);
 };
-
-// module.exports = {
-//   getErrorMessage,
-// defaultCriteria;
-// };

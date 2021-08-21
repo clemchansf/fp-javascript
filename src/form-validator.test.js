@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { getErrorMessage, inputCriteria } from './form-validator';
+import { getErrorMessage } from './form-validator';
 
 describe('Form Field Validation - basic functionality', () => {
   it('gets error messages for a incomplete form data', () => {
@@ -17,7 +17,7 @@ describe('Form Field Validation - basic functionality', () => {
       'State must be exactly 2 characters'
     ];
 
-    const actual = getErrorMessage(currentInputValues, inputCriteria);
+    const actual = getErrorMessage(currentInputValues);
     expect(actual).to.deep.equal(expected);
   });
   it('gets error messages for a partially completed form data', () => {
