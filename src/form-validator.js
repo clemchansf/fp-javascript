@@ -57,13 +57,7 @@ const defaultCriteria = {
 export const getErrorMessage = (inputs, criteria = defaultCriteria) => {
   const errors = Object.keys(inputs).reduce((acc, name) => {
     const errorBlock = criteria[name].reduce((acc, f) => [...acc, f(inputs[name])], []);
-    // return [...acc, ...errorBlock];
-
-    // improve speed
-    Object.keys(errorBlock).forEach(key => {
-      acc.push(errorBlock[key]);
-    });
-    return acc;
+    return [...acc, ...errorBlock];
   }, []);
 
   // criteria.firstName = null; <== eslint no mutation test
